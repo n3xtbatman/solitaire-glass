@@ -224,6 +224,40 @@ Optional Features:
          if (pop !== true) {
             var card = source.shift(); // take card from bottom
             dest.push(card); // push card to destination pile
+            
+  // my notes re: drag and drop         
+            
+            <div class="card" draggable="true"></div>
+            const cards = document.querySelectorAll('.card');
+
+cards.forEach(card => {
+  card.addEventListener('dragstart', dragStart);
+  card.addEventListener('dragover', dragOver);
+  card.addEventListener('drop', drop);
+});
+            
+            function dragStart(e) {
+  e.dataTransfer.setData('text/plain', e.target.id);
+}
+
+function dragOver(e) {
+  e.preventDefault();
+}
+
+function drop(e) {
+  e.preventDefault();
+  const cardId = e.dataTransfer.getData('text/plain');
+  const card = document.getElementById(cardId);
+  const source = getCardPile(card.parentElement);
+  const dest = getCardPile(e.target);
+
+  if (canMove(source, dest)) {
+    move(getCardArray(source), getCardArray(dest), false, getSelectedCards(source).length);
+    updateGame();
+  }
+}
+            
+  // END - my notes re: drag and drop          
          } else {
             while (selectedCards) {
                // take card from the top of selection
