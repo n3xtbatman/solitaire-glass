@@ -17,7 +17,7 @@ html, body {
 body {
    position: relative;
    color: #f3f5f7;
-   background: none;
+   background: #0e8b44 url('https://bfa.github.io/solitaire-js/img/green_felt.jpg')
    background-size: cover;
    background-position: center;
 }
